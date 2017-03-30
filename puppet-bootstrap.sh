@@ -1,14 +1,19 @@
 #!/bin/bash
 
+#
+# TODO: preparar script para instalar o puppetserver
+#
+#
+
 ### vars
 REPO="https://github.com/williancardoso/puppet-controlrepo.git"
 REPO_PUPPETLABS="https://yum.puppetlabs.com/puppetlabs-release-pc1-el-7.noarch.rpm"
 
 ### install puppet repos
-yum install $REPO_PUPPETLABS
+yum install $REPO_PUPPETLABS -y --nogpgcheck
 
 ### Install puppet-agent
-yum install puppet-agent
+yum install puppet -y --nogpgcheck
 
 ### abstrai se yum ou apt-get
 /opt/puppetlabs/bin/puppet resource package git ensure=present
@@ -24,6 +29,9 @@ cat > /etc/puppetlabs/code/hiera.yaml <<EOF
   - "%{::osfamily}"
   - common
 EOF
+
+### install r10k
+/opt/puppetlabs/puppet/bin/gem install r10k
 
 ### configure r10k
 mkdir -p /etc/puppetlabs/r10k
