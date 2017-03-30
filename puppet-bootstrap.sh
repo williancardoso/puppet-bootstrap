@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ### vars
-REPO="https://github.com/williancardoso/puppet-controlrepo.git"
+REPO="https://wvcardoso@gitlab.com/wvcardoso/pcp-controlrepo.git"
 REPO_PUPPETLABS="https://yum.puppetlabs.com/puppetlabs-release-pc1-el-7.noarch.rpm"
 
 ### install puppet repos
