@@ -19,15 +19,24 @@ yum install puppet -y --nogpgcheck
 /opt/puppetlabs/bin/puppet resource package git ensure=present
 /opt/puppetlabs/bin/puppet resource package vim-enhanced ensure=present
 
-### configure hiera  
+### configure hiera
 cat > /etc/puppetlabs/code/hiera.yaml <<EOF
 ---
 :backends:
   - yaml
+:yaml:
+  :datadir: "/etc/puppetlabs/code/environments/%{environment}/hieradata"
 :hierarchy:
   - "nodes/%{::trusted.certname}"
   - "%{::osfamily}"
   - common
+EOF
+
+mkdir -p /etc/puppetlabs/code/environments/production/hieradata/nodes/
+cat > /etc/puppetlabs/code/environments/production/hieradata/nodes/puppetserver.yaml <<EOF
+---
+puppetserver::install::version: '2.7.2'
+
 EOF
 
 ### install r10k
@@ -46,3 +55,6 @@ EOF
 
 ### r10k 
 /opt/puppetlabs/puppet/bin/r10k deploy environment production -v debug --puppetfile
+
+### puppet apply
+/opt/puppetlabs/bin/puppet apply -e "include role::puppetmaster" --hiera_config /etc/puppetlabs/code/hiera.yaml
