@@ -8,6 +8,7 @@
 ### vars
 REPO="https://wvcardoso@gitlab.com/wvcardoso/pcp-controlrepo.git"
 REPO_PUPPETLABS="https://yum.puppetlabs.com/puppetlabs-release-pc1-el-7.noarch.rpm"
+ENVIRONMENT="willian"
 
 ### install puppet repos
 yum install $REPO_PUPPETLABS -y --nogpgcheck
@@ -47,10 +48,10 @@ cat > /etc/puppetlabs/r10k/r10k.yaml <<EOF
 EOF
 
 ### r10k 
-/opt/puppetlabs/puppet/bin/r10k deploy environment production -v debug --puppetfile
+/opt/puppetlabs/puppet/bin/r10k deploy environment $ENVIRONMENT -v debug --puppetfile
 
 ### "tapa" no VIM
 puppet apply -e "class {'userprefs': editor => 'vim', shell => 'bash'}"
 
 ### puppet apply
-/opt/puppetlabs/bin/puppet apply -e "include role::puppetmaster" --hiera_config /etc/puppetlabs/code/hiera.yaml
+/opt/puppetlabs/bin/puppet apply -e "include role::puppetmaster" --hiera_config /etc/puppetlabs/code/hiera.yaml --environment $ENVIRONMENT
