@@ -51,7 +51,7 @@ EOF
 /opt/puppetlabs/puppet/bin/r10k deploy environment $ENVIRONMENT -v debug --puppetfile
 
 ### "tapa" no VIM
-puppet apply -e "class {'userprefs': editor => 'vim', shell => 'bash'}"
+/opt/puppetlabs/bin/puppet apply -e "class {'userprefs': editor => 'vim', shell => 'bash'}"
 
 ### puppet apply
 /opt/puppetlabs/bin/puppet apply -e "include role::puppetmaster" --hiera_config /etc/puppetlabs/code/hiera.yaml --environment $ENVIRONMENT
