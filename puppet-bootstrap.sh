@@ -32,13 +32,6 @@ cat > /etc/puppetlabs/code/hiera.yaml <<EOF
   - common
 EOF
 
-mkdir -p /etc/puppetlabs/code/environments/production/hieradata/nodes/
-cat > /etc/puppetlabs/code/environments/production/hieradata/nodes/puppetserver.yaml <<EOF
----
-puppetserver::install::version: '2.7.2'
-
-EOF
-
 ### install r10k
 /opt/puppetlabs/puppet/bin/gem install r10k
 
@@ -55,6 +48,9 @@ EOF
 
 ### r10k 
 /opt/puppetlabs/puppet/bin/r10k deploy environment production -v debug --puppetfile
+
+### "tapa" no VIM
+puppet apply -e "class {'userprefs': editor => 'vim', shell => 'bash'}"
 
 ### puppet apply
 /opt/puppetlabs/bin/puppet apply -e "include role::puppetmaster" --hiera_config /etc/puppetlabs/code/hiera.yaml
