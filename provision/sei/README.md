@@ -1,6 +1,0 @@
-# Ambiente SEI
-
-
-```
-vagrant up
-```
