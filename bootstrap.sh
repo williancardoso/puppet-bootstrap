@@ -1,12 +1,11 @@
 #!/bin/bash
 
 #
-# TODO: preparar script para instalar o puppetserver
-#
+# TODO: melhorar o provisionamento do puppetserver
 #
 
 ### vars
-REPO="https://wvcardoso@gitlab.com/wvcardoso/pcp-controlrepo.git"
+REPO="https://wvcardoso@gitlab.com/wvcardoso/controlrepo.git"
 REPO_PUPPETLABS="https://yum.puppetlabs.com/puppetlabs-release-pc1-el-7.noarch.rpm"
 ENVIRONMENT="willian"
 
