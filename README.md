@@ -1,11 +1,8 @@
-# puppet-bootstrap
-
-
-Necessario criar link para o vagrantfile
-ex.:
+# Puppet Server
+Repositorio para instalação de um Puppet Server
 
 ```
-git clone https://github.com/williancardoso/puppet-bootstrap.git
-cd puppet-bootstrap/
-ln -s provision/puppetserver/Vagrantfile
+git clone https://github.com/williancardoso/puppetserver.git
+cd puppetserver
+vagrant up
 ```
